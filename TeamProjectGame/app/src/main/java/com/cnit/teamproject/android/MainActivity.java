@@ -1,8 +1,10 @@
-package com.cnit.teamproject;
+package com.cnit.teamproject.android;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.cnit.teamproject.R;
 
 public class MainActivity extends AppCompatActivity {
 
