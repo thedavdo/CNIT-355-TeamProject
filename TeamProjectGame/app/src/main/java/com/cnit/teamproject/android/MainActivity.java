@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -16,9 +17,8 @@ import com.cnit.teamproject.R;
 
 public class MainActivity extends AppCompatActivity {
     private static int SPLASHSCREENDELAY = 4000;//in MS clearly.
-    Animation leftAnim, rightAnim;
-    ImageView image;
-    TextView gameName;
+    Animation leftAnim, rightAnim, finalAnim;
+    ImageView image1Right, iamge1Left, image2Center;
     MediaPlayer splashSong;
 
     @Override
@@ -38,11 +38,14 @@ public class MainActivity extends AppCompatActivity {
          },SPLASHSCREENDELAY);
         rightAnim = AnimationUtils.loadAnimation(this, R.anim.loading_animation_right);
         leftAnim = AnimationUtils.loadAnimation(this, R.anim.loading_animation_left);
+        finalAnim = AnimationUtils.loadAnimation(this, R.anim.loading_animation_final);
 
-        image = findViewById(R.id.imageView);
-        gameName = findViewById(R.id.textView);
-        image.setAnimation(rightAnim);
-        gameName.setAnimation(leftAnim);
+        image1Right = findViewById(R.id.merge1);
+        iamge1Left = findViewById(R.id.merge2);
+        image2Center = findViewById(R.id.mergefinal);
+        image1Right.setAnimation(rightAnim);
+        iamge1Left.setAnimation(leftAnim);
+        image2Center.setAnimation(finalAnim);
         //im a comment
         }
     }
