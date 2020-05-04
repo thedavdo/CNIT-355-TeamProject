@@ -8,7 +8,7 @@ import androidx.room.Query
 @Dao
 interface ScoreDAO {
 
-    @Query("SELECT * FROM score")
+    @Query("SELECT * FROM score ORDER BY score.score DESC")
     fun getScores(): LiveData<List<Score>>
 
     @Query("SELECT *, MAX(score.score) FROM score")

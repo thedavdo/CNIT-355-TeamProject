@@ -26,7 +26,6 @@ class ScoreListFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         scoreListViewModel = ViewModelProvider(this).get(ScoreListViewModel::class.java)
-        Log.println(Log.DEBUG, "Scores", "WHAT?")
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -55,12 +54,6 @@ class ScoreListFragment : Fragment() {
 
         adapter = ScoreAdapter(scores)
         scoreRecyclerView.adapter = adapter
-
-//        Log.println(Log.DEBUG, "Scores", "loading scores")
-//
-//        for (score in scores) {
-//            Log.println(Log.DEBUG, "Scores", "score: ${score.name}, ${score.score}")
-//        }
     }
 
     private inner class ScoreHolder(view: View) : RecyclerView.ViewHolder(view) {
