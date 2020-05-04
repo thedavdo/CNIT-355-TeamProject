@@ -10,8 +10,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.cnit.teamproject.R;
 
@@ -20,12 +23,12 @@ public class MainActivity extends AppCompatActivity {
     Animation leftAnim, rightAnim, finalAnim;
     ImageView image1Right, iamge1Left, image2Center;
     MediaPlayer splashSong;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
+
         splashSong = MediaPlayer.create(MainActivity.this,R.raw.citycarhorn);
         splashSong.start();
         new Handler().postDelayed(new Runnable() {
@@ -46,6 +49,10 @@ public class MainActivity extends AppCompatActivity {
         image1Right.setAnimation(rightAnim);
         iamge1Left.setAnimation(leftAnim);
         image2Center.setAnimation(finalAnim);
+
         //im a comment
-        }
+
+    }
+
+
     }
