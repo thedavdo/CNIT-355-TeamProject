@@ -20,6 +20,7 @@ public class SplashActivity extends AppCompatActivity {
 
         mainMenuSong = MediaPlayer.create(SplashActivity.this,R.raw.traffic_jam);
         mainMenuSong.start();
+        mainMenuSong.setLooping(true);
 
         Button exitGame = (Button) findViewById(R.id.exit_game_button);
         exitGame.setOnClickListener(new View.OnClickListener() {
