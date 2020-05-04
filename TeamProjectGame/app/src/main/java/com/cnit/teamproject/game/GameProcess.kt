@@ -16,7 +16,9 @@ class GameProcess {
 
     var callbacks: CallBacks? = null
 
-    private val fillChance = 0.2
+    private val initFillChance = 0.3
+
+    private val fillChance = 0.1
 
     private val gridWidth = 4
     private val gridHeight = 4
@@ -36,11 +38,13 @@ class GameProcess {
         }
     }
 
-    fun randomFill() {
+    fun randomFill(init : Boolean) {
+
+        val chance = if (init) initFillChance else fillChance
 
         for(y in 0 until gridHeight) {
             for(x in 0 until gridWidth) {
-                if(Random.nextDouble() < fillChance) {
+                if(Random.nextDouble() < chance) {
                     if(gridArray[x][y] == 0) {
                         gridArray[x][y] = 1 + Random.nextInt(0, 3)
                     }
@@ -145,18 +149,20 @@ class GameProcess {
        // printArray()
     }
 
-    fun printArray() {
+    fun arrayToString() : String  {
+
+        var str = ""
 
         for(y in 0 until gridHeight) {
 
-            var str = ""
-
             for(x in 0 until gridWidth) {
                 str += gridArray[x][y]
-                if(x != gridWidth -1) str += " "
+                if(x != gridWidth - 1) str += "   "
             }
 
-            Log.println(Log.DEBUG, "GameDebug", str)
+            str += "\n\n"
         }
+
+        return str
     }
 }
