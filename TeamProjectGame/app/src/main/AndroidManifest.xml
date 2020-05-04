@@ -9,9 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".android.GameFragment"></activity>
-        <activity android:name=".android.GameField"></activity>
-        <activity android:name=".android.SplashActivity" />
         <activity android:name=".android.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -51,13 +51,16 @@ class GameProcess {
 
     fun slideNumbers(inDirNum: Int) {
 
-
+        //Did the user swipe vertically or horizontally
         val isHorizontal = (inDirNum == 0 || inDirNum == 2)
+
+        //Which direction left/right or up/down
         val invertedDirection = (inDirNum == 0 || inDirNum == 3)
 
+        //Convert $invertedDirection into a number we can use in our loops
         val offset = if(invertedDirection) 1 else -1
 
-
+        //
         var endW = gridWidth
         var endH = gridHeight
 

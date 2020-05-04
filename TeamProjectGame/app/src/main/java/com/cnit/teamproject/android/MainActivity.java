@@ -1,6 +1,7 @@
 package com.cnit.teamproject.android;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.media.MediaPlayer;
@@ -19,40 +20,28 @@ import android.widget.Toast;
 import com.cnit.teamproject.R;
 
 public class MainActivity extends AppCompatActivity {
-    private static int SPLASHSCREENDELAY = 4000;//in MS clearly.
-    Animation leftAnim, rightAnim, finalAnim;
-    ImageView image1Right, iamge1Left, image2Center;
-    MediaPlayer splashSong;
+
+    private static int SPLASHSCREENDELAY = 4000; //in MS clearly.
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.activity_main);
 
-        splashSong = MediaPlayer.create(MainActivity.this,R.raw.citycarhorn);
-        splashSong.start();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent SplashIntent = new Intent(MainActivity.this, SplashActivity.class);
-                startActivity(SplashIntent);
-                finish();
-            }
-         },SPLASHSCREENDELAY);
-        rightAnim = AnimationUtils.loadAnimation(this, R.anim.loading_animation_right);
-        leftAnim = AnimationUtils.loadAnimation(this, R.anim.loading_animation_left);
-        finalAnim = AnimationUtils.loadAnimation(this, R.anim.loading_animation_final);
+        Fragment frag = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
 
-        image1Right = findViewById(R.id.merge1);
-        iamge1Left = findViewById(R.id.merge2);
-        image2Center = findViewById(R.id.mergefinal);
-        image1Right.setAnimation(rightAnim);
-        iamge1Left.setAnimation(leftAnim);
-        image2Center.setAnimation(finalAnim);
+        if(frag == null) {
+            frag = new SplashFragment();
+            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, frag).commit();
 
-        //im a comment
-
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    MainMenuFragment mmFrag = new MainMenuFragment();
+                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mmFrag).commit();
+                }
+            }, SPLASHSCREENDELAY);
+        }
     }
-
-
-    }
+}

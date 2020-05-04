@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    tools:context=".android.MainActivity">
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="fitXY"
+        android:src="@raw/splashbackgroundv1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@raw/multiplicitytitle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+    android:id="@+id/merge1"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:src="@raw/splashmergev1"
+    app:layout_constraintHeight_default="percent"
+    app:layout_constraintHeight_percent=".1"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.2"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintVertical_bias=".1"
+    app:layout_constraintWidth_percent=".1"
+    />
+    <ImageView
+    android:id="@+id/merge2"
+    android:layout_width="0dp"
+    android:layout_height="0dp"
+    android:src="@raw/splashmergev1"
+    app:layout_constraintHeight_default="percent"
+    app:layout_constraintHeight_percent=".1"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.8"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintVertical_bias=".1"
+    app:layout_constraintWidth_percent=".1"
+    />
+    <ImageView
+        android:id="@+id/mergefinal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@raw/splashimagefinal2"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent=".1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias=".1"
+        app:layout_constraintWidth_percent=".1"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
+    <!--    comment-->
