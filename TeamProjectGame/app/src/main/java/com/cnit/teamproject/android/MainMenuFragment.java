@@ -19,14 +19,25 @@ public class MainMenuFragment extends Fragment {
 
     private MediaPlayer mainMenuSong;
 
+    public interface Callbacks {
+        public void onStartPress();
+        public void onExitPress();
+    }
+
+    private Callbacks callbacks;
+
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
+
+        callbacks = (Callbacks) context;
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+
+        callbacks = null;
     }
 
     @Nullable
@@ -49,14 +60,16 @@ public class MainMenuFragment extends Fragment {
         Button exitGame = view.findViewById(R.id.exit_game_button);
         exitGame.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getContext(), "exit game", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "exit game", Toast.LENGTH_SHORT).show();
+                callbacks.onExitPress();
             }
         });
 
         Button newGame = view.findViewById(R.id.new_game_button);
         newGame.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getContext(), "start game", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "start game", Toast.LENGTH_SHORT).show();
+                callbacks.onStartPress();
             }
         });
     }
