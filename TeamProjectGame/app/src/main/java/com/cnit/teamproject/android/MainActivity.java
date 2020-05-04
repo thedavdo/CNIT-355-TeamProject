@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.cnit.teamproject.R;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainMenuFragment.Callbacks {
 
     private static int SPLASHSCREENDELAY = 4000; //in MS clearly.
 
@@ -33,15 +33,26 @@ public class MainActivity extends AppCompatActivity {
 
         if(frag == null) {
             frag = new SplashFragment();
-            getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, frag).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, frag).commit();
 
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     MainMenuFragment mmFrag = new MainMenuFragment();
-                    getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mmFrag).commit();
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, mmFrag).commit();
                 }
             }, SPLASHSCREENDELAY);
         }
+    }
+
+    @Override
+    public void onStartPress() {
+        GameFragment gameFrag = new GameFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, gameFrag).commit();
+    }
+
+    @Override
+    public void onExitPress() {
+        finish();
     }
 }
