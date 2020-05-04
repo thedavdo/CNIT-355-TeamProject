@@ -1,10 +1,12 @@
 package com.cnit.teamproject.android
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.cnit.teamproject.R
 import com.cnit.teamproject.game.GameProcess
@@ -18,13 +20,21 @@ class GameFragment : Fragment(), GameProcess.CallBacks  {
 
     private lateinit var game : GameProcess
 
+    private var numberDisp : TextView? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         game = GameProcess()
         game.callbacks = this
 
-        game.randomFill()
+        game.randomFill(true)
+    }
+
+    private fun updateDisplay() {
+        //0 0 0\n0 0 0\n0 0 0
+
+        numberDisp?.text = game.arrayToString()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -62,14 +72,23 @@ class GameFragment : Fragment(), GameProcess.CallBacks  {
             return@setOnTouchListener true
         }
 
+        numberDisp = view.findViewById(R.id.display_grid)
+
+        updateDisplay()
+
         return view
     }
 
     override fun onPlayerMove(oldX: Int, oldY: Int, newX: Int, newY: Int): Boolean {
-        TODO("not implemented")
+
+       // Log.println(Log.DEBUG, "test", "test");
+
+        return false
     }
 
     private fun onSwipe(direction : Int) {
         game.slideNumbers(direction)
+        game.randomFill(false)
+        updateDisplay()
     }
 }
