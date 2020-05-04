@@ -6,14 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".android.GameFragment">
 
-    <Button
-        android:id="@+id/button"
+    <ImageView
+        android:id="@+id/transparent_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@android:drawable/screen_background_dark_transparent"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-27dp" />
+
+    <TextView
+        android:id="@+id/display_grid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TEST!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        android:textSize="55sp"
+        android:textStyle="bold"
+        android:text=""
+        android:textColor="@color/colorTextRaw"
+        app:layout_constraintBottom_toTopOf="@+id/transparent_bg"
+        app:layout_constraintEnd_toStartOf="@+id/transparent_bg"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/transparent_bg"
+        app:layout_constraintTop_toBottomOf="@+id/transparent_bg" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

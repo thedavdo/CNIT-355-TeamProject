@@ -5,4 +5,6 @@
     <color name="colorExit">#EA0808</color>
     <color name="colorStart">#00FF08</color>
     <color name="colorAccent">#000000</color>
+
+    <color name="colorTextRaw">#EEEEEE</color>
 </resources>
