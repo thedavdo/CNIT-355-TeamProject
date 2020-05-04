@@ -25,6 +25,7 @@ class GameProcess {
 
     var gridArray = arrayOf<Array<Int>>()
 
+
     init {
         for(x in 0 until gridWidth) {
 
@@ -123,7 +124,9 @@ class GameProcess {
                                 moveCol = tempC
                                 moveRow = tempR
                             }
-                            else break
+                            else {
+                                break
+                            }
                         }
                     }
 
@@ -160,7 +163,7 @@ class GameProcess {
                 if(x != gridWidth - 1) str += "   "
             }
 
-            str += "\n\n"
+            if(y != gridHeight - 1) str += "\n\n"
         }
 
         return str
