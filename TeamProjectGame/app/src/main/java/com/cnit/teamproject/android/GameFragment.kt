@@ -23,7 +23,10 @@ class GameFragment : Fragment(), GameProcess.CallBacks, BackPressedListener  {
 
     private var mConfirmBack: AlertDialog? = null
 
+    private var mGameOver: AlertDialog? = null
+
     private var numberDisp : TextView? = null
+    private var scoreDisp : TextView? = null
 
     private var shouldQuit : Boolean = false
 
@@ -46,6 +49,7 @@ class GameFragment : Fragment(), GameProcess.CallBacks, BackPressedListener  {
 
     private fun updateDisplay() {
         numberDisp?.text = game.arrayToString()
+        scoreDisp?.text = "Score: ${game.score}"
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -84,11 +88,12 @@ class GameFragment : Fragment(), GameProcess.CallBacks, BackPressedListener  {
         }
 
         numberDisp = view.findViewById(R.id.display_grid)
+        scoreDisp = view.findViewById(R.id.score)
 
         updateDisplay()
 
         val builder = AlertDialog.Builder(inflater.context)
-        builder.setMessage("Save changes?")
+        builder.setMessage("Quit game?")
         builder.setPositiveButton("QUIT") { _, _ ->
             shouldQuit = true
             activity?.onBackPressed()
@@ -97,6 +102,16 @@ class GameFragment : Fragment(), GameProcess.CallBacks, BackPressedListener  {
         builder.setOnDismissListener {}
 
         mConfirmBack = builder.create()
+
+        val gameOverBuilder = AlertDialog.Builder(inflater.context)
+        gameOverBuilder.setMessage("GAME OVER!")
+        gameOverBuilder.setPositiveButton("RETURN TO MAIN MENU") { _, _ ->
+            shouldQuit = true
+            activity?.onBackPressed()
+        }
+        gameOverBuilder.setOnDismissListener {}
+
+        mGameOver = gameOverBuilder.create()
 
         return view
     }
@@ -113,11 +128,16 @@ class GameFragment : Fragment(), GameProcess.CallBacks, BackPressedListener  {
     }
 
     private fun onSwipe(direction : Int) {
-        hasChanges = false
 
+        hasChanges = false
         game.slideNumbers(direction)
 
-        if(hasChanges) game.randomFill(false)
-        updateDisplay()
+        if(game.isGameOver()) {
+            mGameOver?.show()
+        }
+        else {
+            if(hasChanges) game.randomFill(false)
+            updateDisplay()
+        }
     }
 }

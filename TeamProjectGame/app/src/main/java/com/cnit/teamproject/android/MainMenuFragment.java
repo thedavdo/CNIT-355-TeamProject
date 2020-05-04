@@ -20,8 +20,8 @@ public class MainMenuFragment extends Fragment {
     private MediaPlayer mainMenuSong;
 
     public interface Callbacks {
-        public void onStartPress();
-        public void onExitPress();
+        void onStartPress();
+        void onExitPress();
     }
 
     private Callbacks callbacks;

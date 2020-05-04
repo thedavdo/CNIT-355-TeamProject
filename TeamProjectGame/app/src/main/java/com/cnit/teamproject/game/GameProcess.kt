@@ -16,14 +16,17 @@ class GameProcess {
 
     var callbacks: CallBacks? = null
 
-    private val initFillChance = 0.3
+    private val initFillChance = 0.4
 
-    private val fillChance = 0.1
+    private val fillChance = 0.2
 
     private val gridWidth = 4
     private val gridHeight = 4
 
     var gridArray = arrayOf<Array<Int>>()
+
+    var score = 0
+     private set
 
 
     init {
@@ -65,7 +68,6 @@ class GameProcess {
         //Convert $invertedDirection into a number we can use in our loops
         val offset = if(invertedDirection) 1 else -1
 
-        //
         var endW = gridWidth
         var endH = gridHeight
 
@@ -75,8 +77,6 @@ class GameProcess {
         }
 
         Log.println(Log.DEBUG, "GameDebug", "Dir: $inDirNum, Hor: $isHorizontal, Inv: $invertedDirection")
-//        println("Dir: $inDirNum, Hor: $isHorizontal, Inv: $invertedDirection")
-//        println("-----")
 
         for(rawI in 0 until endW) {
 
@@ -137,19 +137,59 @@ class GameProcess {
                         }
                         else if(gridArray[moveCol][moveRow] == gridArray[colNum][rowNum]) {
                             gridArray[moveCol][moveRow]++
+                            score += gridArray[moveCol][moveRow]
                         }
 
                         gridArray[colNum][rowNum] = 0
-
                         callbacks?.onPlayerMove(colNum, rowNum, moveCol, moveRow)
-                        Log.println(Log.DEBUG, "GameDebug", "$colNum, $rowNum -> $moveCol, $moveRow")
-                        //println("$colNum, $rowNum -> $moveCol, $moveRow")
                     }
                 }
             }
         }
+    }
 
-       // printArray()
+    fun isGameOver() : Boolean {
+
+        var noZero = true
+
+        for(y in 0 until gridHeight) {
+            for(x in 0 until gridWidth) {
+                gridArray[x][y]
+
+                if(gridArray[x][y] == 0) {
+                    noZero = false
+                    break
+                }
+            }
+            if(!noZero) break
+        }
+
+        var noMoves = true
+
+        if(noZero) {
+            for(y in 0 until gridHeight) {
+                for(x in 0 until gridWidth) {
+
+                    if(y + 1 <= gridHeight - 1) {
+                        if(gridArray[x][y] == gridArray[x][y + 1]) {
+                            noMoves = false
+                            break
+                        }
+                    }
+
+                    if(x + 1 <= gridWidth - 1) {
+                        if(gridArray[x][y] == gridArray[x + 1][y]) {
+                            noMoves = false
+                            break
+                        }
+                    }
+                }
+
+                if(!noMoves) break
+            }
+        }
+
+        return (noZero && noMoves)
     }
 
     fun arrayToString() : String  {
