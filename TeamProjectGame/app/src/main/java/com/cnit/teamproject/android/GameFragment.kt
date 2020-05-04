@@ -7,11 +7,12 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.cnit.teamproject.R
 import com.cnit.teamproject.game.GameProcess
 
-class GameFragment : Fragment(), GameProcess.CallBacks  {
+class GameFragment : Fragment(), GameProcess.CallBacks, BackPressedListener  {
 
     private val swipeDistance : Float = 150f
 
@@ -20,10 +21,15 @@ class GameFragment : Fragment(), GameProcess.CallBacks  {
 
     private lateinit var game : GameProcess
 
+    private var mConfirmBack: AlertDialog? = null
+
     private var numberDisp : TextView? = null
+
+    private var shouldQuit : Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
 
         game = GameProcess()
         game.callbacks = this
@@ -31,9 +37,14 @@ class GameFragment : Fragment(), GameProcess.CallBacks  {
         game.randomFill(true)
     }
 
-    private fun updateDisplay() {
-        //0 0 0\n0 0 0\n0 0 0
+    override fun onBackPressed(): Boolean {
 
+        if(!shouldQuit) mConfirmBack?.show()
+
+        return !shouldQuit
+    }
+
+    private fun updateDisplay() {
         numberDisp?.text = game.arrayToString()
     }
 
@@ -76,19 +87,37 @@ class GameFragment : Fragment(), GameProcess.CallBacks  {
 
         updateDisplay()
 
+        val builder = AlertDialog.Builder(inflater.context)
+        builder.setMessage("Save changes?")
+        builder.setPositiveButton("QUIT") { _, _ ->
+            shouldQuit = true
+            activity?.onBackPressed()
+        }
+        builder.setNegativeButton("CANCEL") { _, _ -> }
+        builder.setOnDismissListener {}
+
+        mConfirmBack = builder.create()
+
         return view
     }
+
+    private var hasChanges = false
 
     override fun onPlayerMove(oldX: Int, oldY: Int, newX: Int, newY: Int): Boolean {
 
        // Log.println(Log.DEBUG, "test", "test");
 
+        hasChanges = true
+
         return false
     }
 
     private fun onSwipe(direction : Int) {
+        hasChanges = false
+
         game.slideNumbers(direction)
-        game.randomFill(false)
+
+        if(hasChanges) game.randomFill(false)
         updateDisplay()
     }
 }
