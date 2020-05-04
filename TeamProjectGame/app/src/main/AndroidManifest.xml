@@ -4,6 +4,7 @@
     package="com.cnit.teamproject">
 
     <application
+        android:name=".android.MainApplication"
         android:allowBackup="true"
         android:screenOrientation="portrait"
         android:icon="@mipmap/ic_launcher"

@@ -1,12 +1,11 @@
 package com.cnit.teamproject.game
 
-import android.util.Log
 import kotlin.random.Random
 
 class GameProcess {
 
     interface CallBacks {
-        fun onPlayerMove(oldX : Int, oldY : Int, newX : Int, newY : Int) : Boolean
+        fun onTileMove(oldX : Int, oldY : Int, newX : Int, newY : Int) : Boolean
     }
 
     val moveLeft = 0
@@ -16,7 +15,7 @@ class GameProcess {
 
     var callbacks: CallBacks? = null
 
-    private val initFillChance = 0.4
+    private val initFillChance = 0.3
 
     private val fillChance = 0.2
 
@@ -24,10 +23,10 @@ class GameProcess {
     private val gridHeight = 4
 
     var gridArray = arrayOf<Array<Int>>()
+        private set
 
     var score = 0
-     private set
-
+        private set
 
     init {
         for(x in 0 until gridWidth) {
@@ -68,15 +67,15 @@ class GameProcess {
         //Convert $invertedDirection into a number we can use in our loops
         val offset = if(invertedDirection) 1 else -1
 
-        var endW = gridWidth
-        var endH = gridHeight
+        var endW = gridHeight
+        var endH = gridWidth
 
         if(isHorizontal) {
-            endW = gridHeight
-            endH = gridWidth
+            endW = gridWidth
+            endH = gridHeight
         }
 
-        Log.println(Log.DEBUG, "GameDebug", "Dir: $inDirNum, Hor: $isHorizontal, Inv: $invertedDirection")
+       // Log.println(Log.DEBUG, "GameDebug", "Dir: $inDirNum, Hor: $isHorizontal, Inv: $invertedDirection")
 
         for(rawI in 0 until endW) {
 
@@ -141,7 +140,7 @@ class GameProcess {
                         }
 
                         gridArray[colNum][rowNum] = 0
-                        callbacks?.onPlayerMove(colNum, rowNum, moveCol, moveRow)
+                        callbacks?.onTileMove(colNum, rowNum, moveCol, moveRow)
                     }
                 }
             }

@@ -62,21 +62,44 @@
         app:layout_constraintWidth_percent=".5"/>
 
 
-<!--    <androidx.appcompat.widget.AppCompatImageButton-->
-<!--    android:layout_width="0dp"-->
-<!--    android:layout_height="0dp"-->
-<!--    android:id="@+id/end_game_button"-->
-<!--    android:src="@raw/exitbutton"-->
-<!--    app:layout_constraintHeight_default="percent"-->
-<!--    app:layout_constraintHeight_percent=".09"-->
-<!--    app:layout_constraintStart_toStartOf="parent"-->
-<!--    app:layout_constraintEnd_toEndOf="parent"-->
-<!--    app:layout_constraintHorizontal_bias="0.5"-->
-<!--    app:layout_constraintTop_toTopOf="parent"-->
-<!--    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--    app:layout_constraintVertical_bias=".89"-->
-<!--    app:layout_constraintWidth_percent=".5"-->
-<!--    />-->
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/scores"
+        android:textColor="#ffffffff"
+        android:textSize="42dp"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent=".09"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias=".674"
+        app:layout_constraintWidth_percent=".5"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/scores_button"
+        app:layout_constraintHeight_default="percent"
+        android:background="#1C000000"
+        app:layout_constraintHeight_percent=".09"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias=".674"
+        app:layout_constraintWidth_percent=".5"/>
+
+
+
+
+
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

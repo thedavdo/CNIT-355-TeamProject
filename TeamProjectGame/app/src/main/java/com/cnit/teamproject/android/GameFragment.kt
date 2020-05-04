@@ -6,11 +6,16 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.cnit.teamproject.R
 import com.cnit.teamproject.game.GameProcess
+import com.cnit.teamproject.game.Score
+import com.cnit.teamproject.game.ScoreRepository
+import java.util.*
 
 class GameFragment : Fragment(), GameProcess.CallBacks, BackPressedListener  {
 
@@ -30,6 +35,8 @@ class GameFragment : Fragment(), GameProcess.CallBacks, BackPressedListener  {
 
     private var shouldQuit : Boolean = false
 
+    private lateinit var scoreListViewModel: ScoreListViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -38,6 +45,8 @@ class GameFragment : Fragment(), GameProcess.CallBacks, BackPressedListener  {
         game.callbacks = this
 
         game.randomFill(true)
+
+        scoreListViewModel = ViewModelProvider(this).get(ScoreListViewModel::class.java)
     }
 
     override fun onBackPressed(): Boolean {
@@ -104,9 +113,20 @@ class GameFragment : Fragment(), GameProcess.CallBacks, BackPressedListener  {
         mConfirmBack = builder.create()
 
         val gameOverBuilder = AlertDialog.Builder(inflater.context)
-        gameOverBuilder.setMessage("GAME OVER!")
-        gameOverBuilder.setPositiveButton("RETURN TO MAIN MENU") { _, _ ->
+
+        val inputName = EditText(context)
+
+        gameOverBuilder.setView(inputName)
+        gameOverBuilder.setMessage("GAME OVER! Add your name for the score!")
+        gameOverBuilder.setPositiveButton("finish") { _, _ ->
             shouldQuit = true
+
+            val score = Score(UUID.randomUUID())
+            score.score = game.score
+            score.name = inputName.text.toString()
+
+            scoreListViewModel.addScore(score)
+
             activity?.onBackPressed()
         }
         gameOverBuilder.setOnDismissListener {}
@@ -118,12 +138,9 @@ class GameFragment : Fragment(), GameProcess.CallBacks, BackPressedListener  {
 
     private var hasChanges = false
 
-    override fun onPlayerMove(oldX: Int, oldY: Int, newX: Int, newY: Int): Boolean {
-
-       // Log.println(Log.DEBUG, "test", "test");
+    override fun onTileMove(oldX: Int, oldY: Int, newX: Int, newY: Int): Boolean {
 
         hasChanges = true
-
         return false
     }
 

@@ -68,6 +68,18 @@ public class MainActivity extends AppCompatActivity implements MainMenuFragment.
     }
 
     @Override
+    public void onScoresPress() {
+
+        ScoreListFragment scoreFrag = new ScoreListFragment();
+
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, scoreFrag)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
     public void onStartPress() {
 
         GameFragment gameFrag = new GameFragment();
@@ -84,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements MainMenuFragment.
 
         Fragment fr = getSupportFragmentManager().findFragmentById(R.id.fragment_container);
 
-        boolean consumed = true;
+        boolean consumed = false;
 
         if(fr instanceof BackPressedListener) {
             consumed = ((BackPressedListener) fr).onBackPressed();

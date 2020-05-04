@@ -3,4 +3,5 @@
 	<string name="multiplicty">Multiplicty</string>
     <string name="start">New Game</string>
     <string name="exit">Exit Game</string>
+    <string name="scores">View Scores</string>
 </resources>

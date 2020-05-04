@@ -22,6 +22,7 @@ public class MainMenuFragment extends Fragment {
     public interface Callbacks {
         void onStartPress();
         void onExitPress();
+        void onScoresPress();
     }
 
     private Callbacks callbacks;
@@ -62,6 +63,14 @@ public class MainMenuFragment extends Fragment {
             public void onClick(View v) {
                 //Toast.makeText(getContext(), "exit game", Toast.LENGTH_SHORT).show();
                 callbacks.onExitPress();
+            }
+        });
+
+        Button scoresView = view.findViewById(R.id.scores_button);
+        scoresView.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                //Toast.makeText(getContext(), "start game", Toast.LENGTH_SHORT).show();
+                callbacks.onScoresPress();
             }
         });
 
